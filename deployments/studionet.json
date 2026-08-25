@@ -1,0 +1,33 @@
+{
+  "network": "studionet",
+  "chain_id": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "owner_wallet_address": "0x02b49c0B84410c19910DEdC43C9bAB526644F897",
+  "contract_address": "0x019291B60089737Ef73B12aD3E30C553c7BF8cDD",
+  "deployment_transaction_hash": "0xc481b49c4d0c88ec4ac1fb815e096656560f8f587ee433c1b9e2b08361466f7a",
+  "intelligent_transaction_hash": "0x4e386f3b11058bf8a24ce7ecc53eb6f8b741e93d87f7d86911f9f0b9aa7d3bb6",
+  "verified_on": "2026-08-25",
+  "verification": {
+    "transaction_execution_succeeded": true,
+    "status_name": "FINALIZED",
+    "consensus_guard": "result_name absent or AGREE/MAJORITY_AGREE",
+    "execution_guard": "tx_execution_result_name absent or FINISHED_WITH_RETURN",
+    "state_read": "LATEST_FINAL",
+    "observed": {
+      "focus_label": "Observational sketching of object proportions",
+      "result": "QUALIFIES"
+    }
+  },
+  "source": {
+    "path": "contracts/practice_streak.py",
+    "sha256": "d1f1c53ab65a4ef44874bdbceda8e6aa314502789e7c9f7aceff84c0c2b594fe",
+    "genvm_runner": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6"
+  },
+  "wallet_policy": "owner-specific encrypted keystore outside the workspace; no secret committed",
+  "tooling": {
+    "genvm_linter": "0.11.0",
+    "genlayer_test": "0.29.2",
+    "pyright": "1.1.411",
+    "pytest": "9.1.1"
+  }
+}
