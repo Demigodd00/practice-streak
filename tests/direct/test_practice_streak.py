@@ -32,17 +32,19 @@ def prepare(contract, vm, coach, first, second):
 def test_round_scores_points_and_streaks(direct_vm, direct_deploy, direct_alice, direct_bob, direct_charlie):
     contract = deploy(direct_vm, direct_deploy, direct_alice)
     prepare(contract, direct_vm, direct_alice, direct_bob, direct_charlie)
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "QUALIFIES", "focus_label": "Contour proportion"}))
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "1111", "focus_label": "Contour proportion"}))
     contract.assess_session("m1")
+    assert contract.get_session(1, "m1")["evidence_mask"] == "1111"
+    assert contract.get_session(1, "m1")["result"] == "QUALIFIES"
     leader = direct_vm._captured_validators[-1][0]
     direct_vm.clear_mocks()
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "QUALIFIES", "focus_label": "Observed object proportions"}))
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "1111", "focus_label": "Observed object proportions"}))
     assert direct_vm.run_validator(leader_result=leader) is True
     direct_vm.clear_mocks()
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "REJECTED", "focus_label": "Unrelated activity"}))
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "0000", "focus_label": "Unrelated activity"}))
     assert direct_vm.run_validator(leader_result=leader) is False
     direct_vm.clear_mocks()
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "QUALIFIES", "focus_label": "Contour proportion"}))
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "1111", "focus_label": "Contour proportion"}))
     contract.assess_session("m2")
     contract.finalize_round()
     assert contract.get_member("m1")["total_points"] == 2
@@ -66,13 +68,13 @@ def test_named_member_and_single_log_are_enforced(direct_vm, direct_deploy, dire
 def test_peer_challenge_and_bad_result_fail_closed(direct_vm, direct_deploy, direct_alice, direct_bob, direct_charlie):
     contract = deploy(direct_vm, direct_deploy, direct_alice)
     prepare(contract, direct_vm, direct_alice, direct_bob, direct_charlie)
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "PARTIAL", "focus_label": "Contour exercise"}))
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "1110", "focus_label": "Contour exercise"}))
     contract.assess_session("m1")
     direct_vm.sender = direct_charlie
     contract.challenge_session("m1", "The log explicitly states both 25 focused minutes and a concrete proportion observation, so both requirements are present.")
     direct_vm.clear_mocks()
-    direct_vm.mock_llm(PROMPT, json.dumps({"result": "PASS", "focus_label": "Contour exercise"}))
-    with direct_vm.expect_revert("invalid_result"):
+    direct_vm.mock_llm(PROMPT, json.dumps({"evidence_mask": "11X1", "focus_label": "Contour exercise"}))
+    with direct_vm.expect_revert("invalid_evidence_mask"):
         contract.assess_session("m1")
     assert contract.get_session(1, "m1")["state"] == "CHALLENGED"
     assert contract.get_state()["assessed_count"] == 0

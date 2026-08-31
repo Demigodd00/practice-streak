@@ -26,13 +26,13 @@ Before consensus, the contract normalizes bounded text, reads all required stora
 
 ## Consensus boundary
 
-Return QUALIFIES, PARTIAL, or REJECTED against a frozen objective and rule, plus a short advisory focus label. Validators agree on the result category.
+Validators independently bind a four-bit evidence mask ordered by objective alignment, exercise identification, duration or effort evidence, and a concrete observation or reflection. Focus-label wording remains advisory.
 
-The leader callback validates JSON shape, field types, closed categories, masks, and length bounds. A validator reruns the same semantic operation and rejects disagreement. Where an explanatory label can vary harmlessly, consensus binds the stable decision field while still checking that the leader's advisory text is well formed.
+The leader callback validates exact mask shape and label bounds. A validator reruns the same component analysis and rejects disagreement in any bit. The contract—not the model—derives the result: missing objective alignment is REJECTED, all four components is QUALIFIES, and two or three supported components is PARTIAL.
 
 ## Deterministic boundary
 
-Member authorization, one log/challenge per round, fixed 2/1/0 points, streak increments/resets, and round completion are deterministic.
+Result derivation, member authorization, one log/challenge per round, fixed 2/1/0 points, streak increments/resets, and round completion are deterministic.
 
 Important invariants:
 
