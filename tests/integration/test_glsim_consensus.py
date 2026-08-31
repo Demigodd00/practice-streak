@@ -11,7 +11,7 @@ PROMPT = "Assess one self-reported practice session"
 
 
 def context():
-    validators = get_validator_factory().batch_create_mock_validators(5, mock_llm_response={"nondet_exec_prompt": {PROMPT: json.dumps({"result": "QUALIFIES", "focus_label": "Contour proportion"})}})
+    validators = get_validator_factory().batch_create_mock_validators(5, mock_llm_response={"nondet_exec_prompt": {PROMPT: json.dumps({"evidence_mask": "1111", "focus_label": "Contour proportion"})}})
     return {"validators": [validator.to_dict() for validator in validators]}
 
 
