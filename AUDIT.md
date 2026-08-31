@@ -1,14 +1,16 @@
-# Final Review Audit
+# Structured Judgment Update Audit
 
-Audit date: 2026-08-25
+Audit date: 2026-08-31
 
 Audited source: `contracts/practice_streak.py`
 
-Source SHA-256: `d1f1c53ab65a4ef44874bdbceda8e6aa314502789e7c9f7aceff84c0c2b594fe`
+Source SHA-256: `9607536a71c0696686bd58b1cd7e0a8adbbffe75cdfdc960b7ce05ae35fd95a5`
 
 ## Outcome
 
-No open code, consensus, source-collection, secret, originality, test, or submission blocker was found in the final source.
+The category-only judgment identified in the prior review has been removed. Validators bind a four-bit evidence mask covering objective alignment, exercise identification, duration or effort, and a concrete observation. The contract stores that intermediate mask and derives QUALIFIES, PARTIAL, or REJECTED plus fixed points before peer challenge, round finalization, and streak updates.
+
+The current source passed local and GitHub verification. It is not ready to submit with the previous StudioNet links: that deployment is bound to the superseded source and must be replaced by a deployment of the current hash.
 
 ## Verification matrix
 
@@ -16,42 +18,26 @@ No open code, consensus, source-collection, secret, originality, test, or submis
 | --- | --- |
 | Concrete GenVM runner pin | Pass |
 | `genvm-lint check` | Pass |
-| `genvm-lint typecheck` | Pass |
+| `genvm-lint typecheck` | Pass in GitHub CI |
 | Hardened direct tests | Pass — 3 tests |
-| Leader plus independent-validator replay | Pass |
+| Independent validator replay over intermediate results | Pass |
 | Five-validator GLSim integration | Pass |
-| Final-source StudioNet deployment and intelligent write | Pass |
-| Final state read via `LATEST_FINAL` | Pass |
-| Nondeterministic callback storage-read audit | Pass — 0 findings |
-| Action workflow syntax (`actionlint`) | Pass |
-| Pinned Python dependencies and `pip check` | Pass |
-| Source-policy and prompt-injection boundary | Pass |
-| Wallet/private-key/generic secret scan | Pass |
-| Exact contract hash across workspace | Pass — no duplicate |
-| Workspace originality comparison | Pass — highest non-target score 0.4024 |
+| Deterministic final-outcome derivation | Pass |
+| Structured intermediate result stored on-chain | Pass |
+| Meaningful reusable lifecycle after judgment | Pass |
+| Current-source StudioNet deployment and intelligent write | Pending redeployment |
+| Previous deployment | Superseded; do not submit as current proof |
 | Fund custody and cross-contract calls | None |
 
-## Review findings addressed
+## Rejection issue addressed
 
-- The final contract is a substantive workflow with contract-specific roles, records, lifecycle, challenges or human confirmation; it is not an earlier contract with a renamed class.
-- Validator callbacks consume captured plain evidence rather than reading GenVM storage inside nondeterministic execution.
-- Strict structured output and independent replay prevent free-form text from becoming unchecked state.
-- Source collection is explicit: The only evidence is the stored practice rule, round objective, self-report, and peer challenge. No wearable, camera, school, employer, or identity data is collected.
-- All live tests use a new owner-specific wallet set outside the workspace; no wallet was reused from Stephen or any other owner.
+The model no longer returns a final category for one equality check. Consensus binds independently replayed intermediate findings, the contract derives the final outcome by explicit rules, and that outcome controls later contract-specific state transitions.
 
-## StudioNet evidence
+## Required before submission
 
-- Contract: https://explorer-studio.genlayer.com/address/0x019291B60089737Ef73B12aD3E30C553c7BF8cDD
-- Deployment: https://explorer-studio.genlayer.com/tx/0xc481b49c4d0c88ec4ac1fb815e096656560f8f587ee433c1b9e2b08361466f7a
-- Intelligent write: https://explorer-studio.genlayer.com/tx/0x4e386f3b11058bf8a24ce7ecc53eb6f8b741e93d87f7d86911f9f0b9aa7d3bb6
-- Observed: `{"focus_label": "Observational sketching of object proportions", "result": "QUALIFIES"}`
+1. Deploy the current `contracts/practice_streak.py` source.
+2. Execute and finalize a representative intelligent write.
+3. Record the new contract address, transaction hashes, observed intermediate fields, and source hash.
+4. Replace the pending fields in `SUBMISSION.md`, `README.md`, and `deployments/studionet.json`.
 
-The smoke test asserted successful execution and `FINALIZED` status, accepted only agreement outcomes exposed by the current receipt schema, and read the committed state using `LATEST_FINAL`.
-
-## Residual product limits
-
-- Session logs are self-reported and are not proof that an activity occurred.
-- Every member must log before the coach can advance a round.
-- The contract must not be used for health, employment, school admission, or other high-stakes evaluation.
-
-These are disclosed operating boundaries, not hidden test failures. Hosted GitHub Actions is checked after publication; local workflow syntax and every underlying command were verified before the clean root commit.
+Legacy deployment address: `0x019291B60089737Ef73B12aD3E30C553c7BF8cDD`.
